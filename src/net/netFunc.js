@@ -59,7 +59,7 @@ export async function uploadForJson(netCallback:?NetCallback,path:string,file,fi
     config = config ? config : {};
     config.cancelToken = source.token;
     config.onUploadProgress = (event)=>{
-        netCallback.progress(event.total,event.load);
+        netCallback.progress(event.total,event.loaded);
     }
     let formData = new FormData();
     formData.append(filename, file);
@@ -84,7 +84,7 @@ export async function uploadsForJson(netCallback:?NetCallback = {}, path:string,
     config = config ? config : {};
     config.cancelToken = source.token;
     config.onUploadProgress = (event)=>{
-        netCallback.progress(event.total,event.load);
+        netCallback.progress(event.total,event.loaded);
     }
     try{
         let result = await axios.post(path, params, config);
@@ -104,7 +104,7 @@ export async function uploadSingleForJson(netCallback:?NetCallback = {},path:str
     config = config ? config : {};
     config.cancelToken = source.token;
     config.onUploadProgress = (event)=>{
-        netCallback.progress(event.total,event.load);
+        netCallback.progress(event.total,event.loaded);
     }
     let formData = new FormData();
     formData.append(filename, file);
@@ -126,7 +126,7 @@ export async function uploadsSingleForJson(netCallback:?NetCallback = {},path:st
     config = config ? config : {};
     config.cancelToken = source.token;
     config.onUploadProgress = (event)=>{
-        netCallback.progress(event.total, event.load);
+        netCallback.progress(event.total, event.loaded);
     }
     try{
         let result = await axios.post(path, params, config);
@@ -143,7 +143,6 @@ export async function uploadsSingleForJson(netCallback:?NetCallback = {},path:st
 
 
 function handleResult(netCallback:?NetCallback,data){
-    console.log(data);
     if(data.core == 0){
         netCallback.success(data);
     }else if(data.core == 1){
